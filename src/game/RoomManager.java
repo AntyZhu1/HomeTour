@@ -95,12 +95,53 @@ public class RoomManager {
        
        this.rooms[5] = garden;
        
+       Room upStairsHall = new Room(
+    		   "The Upstairs Hallway",
+	       		"a small hallway connecting a few rooms",
+	       		"You arrive upstairs in a small hallway leading off into 3 rooms."
+	       		+ "\n"
+	       		+ "To the north is the master bedroom"
+	       		+ "\n"
+	       		+ "To the west is the guest bedroom"
+	       		+ "\n"
+	       		+ "To the east is a bathroom"
+	       		+ "\n"
+	       		+ "Behind you, down the stairs, is the foyer."
+    		   );
+       
+       Room masterBed = new Room(
+    		   "The Master Bedroom",
+	       		"a well decorated bedroom with a large bed",
+	       		"The master bedroom is well decorated and comfortable looking, a large king sized bed lies against the wall in front of you."
+	       		+ "\n"
+	       		+ "Behind you, to the south, is the upstairs hallway."
+    		   );
+       
+       Room guestBed = new Room(
+    		   "The Guest Bedroom",
+	       		"a small, but comfortable, guest bedroom",
+	       		"The guest bedroom is small, but still well furnished. A confortable looking bed lies against the wall and a small dresser rests against"
+	       		+ "\n"
+	       		+ "the opposite wall."
+	       		+ "\n"
+	       		+ "Behind you, to the east, is the upstairs hallway."
+    		   );
+       
+       Room bathroom = new Room(
+    		   "The Bathroom",
+	       		"a clean bathroom",
+	       		"The upstairs bathroom is clean and well kept. The smell of lavender emenates from a small candle atop the sink's countertop."
+	       		+ "\n"
+	       		+ "Behind you, to the west, is the upstairs hallway."
+    		   );
+       
        //Exit Assignments per room
        
        //foyer exits
        foyer.exits.put("east", diningRoom);
        foyer.exits.put("north", livingRoom);
-       foyer.exits.put("west", diningRoom);
+       foyer.exits.put("west", solarium);
+       foyer.exits.put("up", upStairsHall);
        
        //dining room exits
        diningRoom.exits.put("north", kitchen);
@@ -117,7 +158,21 @@ public class RoomManager {
        
        //garden exits
        garden.exits.put("west", solarium);
-
+       
+       //upstairs hallway exits
+       upStairsHall.exits.put("east", bathroom);
+       upStairsHall.exits.put("north", masterBed);
+       upStairsHall.exits.put("west", guestBed);
+       upStairsHall.exits.put("down", foyer);
+       
+       //master bedroom exits
+       masterBed.exits.put("south", upStairsHall);
+       
+       //guest bedroom exits
+       guestBed.exits.put("east", upStairsHall);
+       
+       //bathroom exits
+       bathroom.exits.put("west", upStairsHall);
 	}
 
 }

@@ -3,6 +3,9 @@ package game;
 
 import java.util.Scanner;  // Import the Scanner class
 
+import java.util.HashMap; // Import the HashMap class
+
+
 import fixtures.Room;
 
 /*
@@ -45,7 +48,9 @@ public class Main {
 	}
 	
 	private static void printRoom(Player player) {
-		System.out.println("You are currently in the " + player.currentRoom + ".");
+		
+		System.out.println("You are currently in " + player.currentRoom.getCurrentRoom() + ".");
+		
 	}
 
 	/*
@@ -67,119 +72,242 @@ public class Main {
 	 */
 	private static void parse(String[] command, Player player) {
 		String command1 = command[0].toLowerCase();
-		String command2 = command[1].toLowerCase();
-		
-//		System.out.println(command1);
-//		System.out.println(command2);
-		
-		if (command1.equals("go")) {
+		try {
+			String command2 = command[1].toLowerCase();
+//			System.out.println(command1);
+//			System.out.println(command2);
 			
-			if (command2.equals("north")) {
-				String roomCheck = "north";
+			if (command1.equals("go")) {
 				
-				boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
-				
-				if (roomExists == true) {
+				if (command2.equals("north")) {
+					String roomCheck = "north";
 					
-					p.currentRoom = p.currentRoom.exits.get("north");
-					System.out.println("You head north towards " + p.currentRoom.getCurrentRoom());
-					System.out.println("\n");
-					p.currentRoom.closelyExamineRoom();
+					boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+					
+					if (roomExists == true) {
+						
+						p.currentRoom = p.currentRoom.exits.get("north");
+						System.out.println("You head north towards " + p.currentRoom.getCurrentRoom());
+						System.out.println("\n");
+						p.currentRoom.closelyExamineRoom();
+						
+					}
+					else {
+						System.out.println("There is no room to the north.");
+					}
+						
+				}
+				
+				else if (command2.equals("south")) {
+					String roomCheck = "south";
+					
+					boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+					
+					if (roomExists == true) {
+						
+						p.currentRoom = p.currentRoom.exits.get("south");
+						System.out.println("You head south towards " + p.currentRoom.getCurrentRoom());
+						System.out.println("\n");
+						p.currentRoom.closelyExamineRoom();
+						
+					}
+					else {
+						System.out.println("There is no room to the south.");
+					}
 					
 				}
-				else {
-					System.out.println("There is no room to the north.");
-				}
+				
+				else if (command2.equals("east")) {
 					
+					String roomCheck = "east";
+					
+					boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+					
+					if (roomExists == true) {
+						
+						p.currentRoom = p.currentRoom.exits.get("east");
+						System.out.println("You head east towards " + p.currentRoom.getCurrentRoom());
+						System.out.println("\n");
+						p.currentRoom.closelyExamineRoom();
+						
+					}
+					else {
+						System.out.println("There is no room to the east.");
+					}
+				}
+
+				else if (command2.equals("west")) {
+					
+					String roomCheck = "west";
+					
+					boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+					
+					if (roomExists == true) {
+						
+						p.currentRoom = p.currentRoom.exits.get("west");
+						System.out.println("You head west towards " + p.currentRoom.getCurrentRoom());
+						System.out.println("\n");
+						p.currentRoom.closelyExamineRoom();
+						
+					}
+					else {
+						System.out.println("There is no room to the west.");
+					}
+				}
+				
+				else if (command2.equals("up")) {
+					
+					String roomCheck = "up";
+					
+					boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+					
+					if (roomExists == true) {
+						
+						p.currentRoom = p.currentRoom.exits.get("up");
+						System.out.println("You go upstairs towards " + p.currentRoom.getCurrentRoom());
+						System.out.println("\n");
+						p.currentRoom.closelyExamineRoom();
+						
+					}
+					else {
+						System.out.println("There are no stairs leading up here.");
+					}
+				}
+				
+				else if (command2.equals("down")) {
+					
+					String roomCheck = "down";
+					
+					boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+					
+					if (roomExists == true) {
+						
+						p.currentRoom = p.currentRoom.exits.get("down");
+						System.out.println("You go downstairs towards " + p.currentRoom.getCurrentRoom());
+						System.out.println("\n");
+						p.currentRoom.closelyExamineRoom();
+						
+					}
+					else {
+						System.out.println("There are no stairs leading down here.");
+					}
+				}
+				
 			}
 			
-			else if (command2.equals("south")) {
-				String roomCheck = "south";
+			if (command1.equals("examine")) {
 				
-				boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
+				/* Check if object in question is in the room
+				 * print interaction
+				 * leave loop
+				 */
 				
-				if (roomExists == true) {
-					
-					p.currentRoom = p.currentRoom.exits.get("south");
-					System.out.println("You head south towards " + p.currentRoom.getCurrentRoom());
-					System.out.println("\n");
-					p.currentRoom.closelyExamineRoom();
-					
-				}
-				else {
-					System.out.println("There is no room to the south.");
-				}
+				System.out.println("Furniture still a work in progress");
 				
 			}
 			
-			else if (command2.equals("east")) {
+			if (command1.equals("check")) {
 				
-				String roomCheck = "east";
+				if (command2.equals("room")){
+					printRoom(p);
+				}
 				
-				boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
-				
-				if (roomExists == true) {
+				else if (command2.equals("exits")) {
 					
-					p.currentRoom = p.currentRoom.exits.get("east");
-					System.out.println("You head east towards " + p.currentRoom.getCurrentRoom());
-					System.out.println("\n");
-					p.currentRoom.closelyExamineRoom();
+					boolean northExitExists = p.currentRoom.exits.containsKey("north");
+					boolean southExitExists = p.currentRoom.exits.containsKey("south");
+					boolean eastExitExists = p.currentRoom.exits.containsKey("east");
+					boolean westExitExists = p.currentRoom.exits.containsKey("west");
+					boolean upstairsExists = p.currentRoom.exits.containsKey("up");
+					boolean downstairsExists = p.currentRoom.exits.containsKey("down");
 					
+					if (northExitExists == true) {
+						
+						System.out.print("To the north, you see "); 
+						p.currentRoom.exits.get("north").examineRoom();
+						
+					}
+					
+					if (southExitExists == true) {
+						
+						System.out.print("To the south, you see "); 
+						p.currentRoom.exits.get("south").examineRoom();					
+					}
+					
+					if (eastExitExists == true) {
+						
+						System.out.print("To the east, you see "); 
+						p.currentRoom.exits.get("east").examineRoom();					
+					}
+					if (westExitExists == true) {
+						
+						System.out.print("To the west, you see "); 
+						p.currentRoom.exits.get("west").examineRoom();					
+					}
+					if (upstairsExists == true) {
+						
+						System.out.print("Upstairs, you see "); 
+						p.currentRoom.exits.get("up").examineRoom();					
+					}
+					if (downstairsExists == true) {
+						
+						System.out.print("Downstairs, you see "); 
+						p.currentRoom.exits.get("up").examineRoom();					
+					}
+					
+					
+				}
+				else if (command2.equals("north")) {
+					p.currentRoom.getExit("north");
+				}
+				else if (command2.equals("south")) {
+					p.currentRoom.getExit("south");
+				}
+				else if (command2.equals("east")) {
+					p.currentRoom.getExit("east");
+				}
+				else if (command2.equals("west")) {
+					p.currentRoom.getExit("west");
 				}
 				else {
-					System.out.println("There is no room to the east.");
+					System.out.println("Sorry, what was that?");
 				}
+
+			}
+			
+			if (command1.equals("print")) {
+				printHelp();
+			}
+			
+			if (command1.equals("leave")) {
+				System.out.println("Leaving House");
+				leaving = true;
+//				System.out.println(leaving);
+			}
+			
+//			Testing Code
+//			System.out.println("End of Parse");
+		}
+		catch (Exception e) {
+			
+			if (command1.equals("leave")) {
+				System.out.println("Leaving House");
+				leaving = true;
+//				System.out.println(leaving);
+			}
+			else if (command1.equals("help")) {
+				printHelp();
+			}
+			else {
+//				e.printStackTrace();
+				System.out.println("Sorry, I didn't catch that. Did you have a second word in the command?"
+						+ "\n");
 			}
 
-			else if (command2.equals("west")) {
-				
-				String roomCheck = "west";
-				
-				boolean roomExists = p.currentRoom.exits.containsKey(roomCheck);
-				
-				if (roomExists == true) {
-					
-					p.currentRoom = p.currentRoom.exits.get("west");
-					System.out.println("You head west towards " + p.currentRoom.getCurrentRoom());
-					System.out.println("\n");
-					p.currentRoom.closelyExamineRoom();
-					
-				}
-				else {
-					System.out.println("There is no room to the west.");
-				}
-			}
-			
+
 		}
 		
-		if (command1.equals("examine")) {
-			
-			/* Check if object in question is in the room
-			 * print interaction
-			 * leave loop
-			 */
-			
-			System.out.println("Examine");
-			
-		}
-		
-		if (command1.equals("check")) {
-			
-			System.out.println("check");
-		}
-		
-		if (command1.equals("print")) {
-			printHelp();
-		}
-		
-		if (command1.equals("leave")) {
-			System.out.println("Leaving House");
-			leaving = true;
-			System.out.println(leaving);
-		}
-		
-//		Testing Code
-		System.out.println("End of Parse");
+
 	
 	}
 	
@@ -196,9 +324,9 @@ public class Main {
 				+ "\n"
 				+ "To check a specific direction for an exit, use 'check <direction>'. For example: 'check north'."
 				+ "\n"
-				+ "To exit the house, use 'leave house'."
+				+ "To exit the house, use 'leave house' or 'leave'."
 				+ "\n"
-				+ "To see this message again, use 'print help'."
+				+ "To see this message again, use 'print help' or 'help'."
 				+ "\n");
 		
 	}
