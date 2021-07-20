@@ -5,7 +5,6 @@ import java.util.Scanner;  // Import the Scanner class
 
 import java.util.HashMap; // Import the HashMap class
 
-
 import fixtures.Room;
 
 /*
@@ -76,9 +75,11 @@ public class Main {
 			String command2 = command[1].toLowerCase();
 //			System.out.println(command1);
 //			System.out.println(command2);
-			
+
+			//Movement between Rooms
 			if (command1.equals("go")) {
 				
+				//Cardnial directions and up/down
 				if (command2.equals("north")) {
 					String roomCheck = "north";
 					
@@ -192,9 +193,14 @@ public class Main {
 						System.out.println("There are no stairs leading down here.");
 					}
 				}
+				else {
+					System.out.println("Sorry, what was that?"
+							+ "\n");
+				}
 				
 			}
 			
+			//Interacting with furniture
 			if (command1.equals("examine")) {
 				
 				/* Check if object in question is in the room
@@ -206,12 +212,13 @@ public class Main {
 				
 			}
 			
+			//checking room or exits
 			if (command1.equals("check")) {
 				
 				if (command2.equals("room")){
 					printRoom(p);
 				}
-				
+				// All Exits
 				else if (command2.equals("exits")) {
 					
 					boolean northExitExists = p.currentRoom.exits.containsKey("north");
@@ -254,31 +261,90 @@ public class Main {
 						System.out.print("Downstairs, you see "); 
 						p.currentRoom.exits.get("up").examineRoom();					
 					}
-					
-					
+						
 				}
+				
+				// Specific Exits
 				else if (command2.equals("north")) {
-					p.currentRoom.getExit("north");
+					boolean northExitExists = p.currentRoom.exits.containsKey("north");
+					if (northExitExists == true) {
+						System.out.print("To the north lies ");
+						p.currentRoom.getExit("north").examineRoom();
+					}
+					else {
+						System.out.println("There is no exit in that direction.");
+					}
 				}
+				
 				else if (command2.equals("south")) {
-					p.currentRoom.getExit("south");
+					boolean southExitExists = p.currentRoom.exits.containsKey("south");
+					if (southExitExists == true) {
+						System.out.print("To the south lies ");
+						p.currentRoom.getExit("south").examineRoom();	
+					}
+
 				}
+				
 				else if (command2.equals("east")) {
-					p.currentRoom.getExit("east");
+					boolean eastExitExists = p.currentRoom.exits.containsKey("east");
+					if (eastExitExists == true) {
+						System.out.print("To the east lies ");
+						p.currentRoom.getExit("east").examineRoom();
+					}
+					else {
+						System.out.println("There is no exit in that direction.");
+					}
+
 				}
+				
 				else if (command2.equals("west")) {
-					p.currentRoom.getExit("west");
+					boolean westExitExists = p.currentRoom.exits.containsKey("west");
+					if (westExitExists == true) {
+						System.out.print("To the west lies ");
+						p.currentRoom.getExit("west").examineRoom();
+					}
+					else {
+						System.out.println("There is no exit in that direction.");
+					}
+
+				}
+				
+				else if (command2.equals("up")) {
+					boolean upstairsExists = p.currentRoom.exits.containsKey("up");
+					if (upstairsExists == true) {
+						System.out.print("Upstairs is ");
+						p.currentRoom.getExit("up").examineRoom();
+					}
+					else {
+						System.out.println("There is no exit in that direction.");
+					}
+
+				}
+				
+				else if (command2.equals("down")) {
+					boolean downstairsExists = p.currentRoom.exits.containsKey("down");
+					if (downstairsExists == true) {
+						System.out.print("Downstairs is ");
+						p.currentRoom.getExit("down").examineRoom();
+					}
+					else {
+						System.out.println("There is no exit in that direction.");
+					}
+					
 				}
 				else {
-					System.out.println("Sorry, what was that?");
+					System.out.println("Sorry, what was that?"
+							+ "\n");
 				}
 
 			}
 			
+			//getting help
 			if (command1.equals("print")) {
 				printHelp();
 			}
 			
+			//exiting house
 			if (command1.equals("leave")) {
 				System.out.println("Leaving House");
 				leaving = true;
@@ -288,6 +354,7 @@ public class Main {
 //			Testing Code
 //			System.out.println("End of Parse");
 		}
+		// Covering my bases, leave and help commands can be used with 1 word rather than 2.
 		catch (Exception e) {
 			
 			if (command1.equals("leave")) {

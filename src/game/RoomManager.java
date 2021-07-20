@@ -138,9 +138,9 @@ public class RoomManager {
        //Exit Assignments per room
        
        //foyer exits
-       foyer.exits.put("east", diningRoom);
+       foyer.exits.put("west", diningRoom);
        foyer.exits.put("north", livingRoom);
-       foyer.exits.put("west", solarium);
+       foyer.exits.put("east", solarium);
        foyer.exits.put("up", upStairsHall);
        
        //dining room exits
