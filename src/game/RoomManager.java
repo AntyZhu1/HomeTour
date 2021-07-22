@@ -2,6 +2,13 @@ package game;
 
 import fixtures.Room;
 
+import fixtures.Furniture;
+
+import java.util.ArrayList;
+
+import java.util.HashMap;
+
+
 /* This class will be responsible for "loading" our rooms into memory. 
  * When game.Main is executed, it will invoke the init() method in this class that will instantiate all our Room objects,
  * link them together as exits, and designate a startingRoom.
@@ -14,11 +21,15 @@ public class RoomManager {
 	Room startingRoom;
 
 	public void init() {
+
+		//Foyer Information
 		
 		Room foyer = new Room(
 				"The Foyer",
 				"a small foyer",
 				"You find yourself in a small foyer, it's walls decorated with old paintings and photographs."
+				+ "\n"
+				+ "You see a *painting* of a family and an antique *vase*."
 				+ "\n"
 				+ "To your west is a door leading to the dining room."
 				+ "\n"
@@ -29,20 +40,59 @@ public class RoomManager {
 		
 		this.rooms[0] = foyer;
         this.startingRoom  = foyer;
-
                 
+        Furniture familyPainting = new Furniture(
+        		"A painting of a family",
+        		"A nice painting depicting a small family, it looks rather old.",
+        		"You look at the painting, and appreciate the brushwork."
+        		+ "\n"
+        		+ "You think about touching it, but we all know you shouldn't touch old art."
+        		);
+        
+        foyer.furnitureInRoom.put("painting", familyPainting);
+       
+        Furniture foyerVase = new Furniture(
+        		"An antique vase",
+        		"An old porcelain vase sits atop a small stand in the foyer.",
+        		"You look at the vase, examining its intricate design and floral patterns."
+        		+ "\n"
+        		+ "It's quite a nice vase, though you think it could use some flowers."
+        		);
+        foyer.furnitureInRoom.put("vase", foyerVase);
+
+
+        //Dining Room Information
         Room diningRoom = new Room(
         		"The Dining Room",
         		"a quaint dining room",
-        		"You enter the dining room. A small warmly lit room greets you, a round mahoganny table sitting in the center of the room."
+        		"You enter the dining room. A small warmly lit room greets you, a round mahogany *table* sitting in the center of the room."
         		+ "\n"
-        		+ "Around the table sits several confortable looking chairs, each one with a red velvet cushion on the seat and back."
+        		+ "Around the table sits several confortable looking *chairs*, each one with a red velvet cushion on the seat and back."
         		+ "\n"
         		+ "On the table, a collection of fine china sits. Alongside these plates and bowls are sets of beautiful silverware."
         		+ "\n"
-        		+ "A small door sits on the north side of the room, leading into the kitchen");
+        		+ "A small door sits on the north side of the room, leading into the kitchen"
+        		+ "\n"
+        		+ "To the east lies the foyer.");
         this.rooms[1] = diningRoom;
         
+        Furniture mahoganyTable = new Furniture(
+        		"A mahogany table",
+        		"A well crafted table sitting in the center of the room",
+        		"You run your hand along the surface of the table. The wood is smooth and finished."
+        		);
+        
+        diningRoom.furnitureInRoom.put("table", mahoganyTable);
+        
+        Furniture chairs = new Furniture(
+        		"A Set of Chairs",
+        		"4 Wooden chairs with velvet cushions sitting around the dining table.",
+        		"You sit in each of the chairs, finding each of them to be very comfortable."
+        		);
+        
+        diningRoom.furnitureInRoom.put("chairs", chairs);
+        
+        //Kitchen Information
         Room kitchen = new Room(
         		"The Kitchen",
         		"a well stocked kitchen",
@@ -53,18 +103,33 @@ public class RoomManager {
         
        this.rooms[2] = kitchen;
        
+       
+       //Living Room Information
        Room livingRoom = new Room(
     		   "The Living Room",
 	       		"a welcoming living room",
 	       		"A warm, crackling fire burns brightly in the fireplace within this living room."
 	       		+ "\n"
-	       		+ "Several couches surround a small coffee table at the center of the room, almost beckoning you to take a seat."
+	       		+ "Several *couches* surround a small coffee table at the center of the room, almost beckoning you to take a seat."
 	       		+ "\n"
 	       		+ "Behind you, to your south, is the foyer."
     		   );
        
        this.rooms[3] = livingRoom;
        
+       Furniture couches = new Furniture(
+       		"A few couches",
+       		"The living room couches, each one looks very comfortable. ",
+       		"You go from couch to couch, sitting down or laying down if the couch allows it."
+       		+ "\n"
+       		+ "Each couch is very comfortable and soft, and you almost feel like falling asleep from time to time."
+       		+ "\n"
+       		+ "You eventually get up and move on."
+       		);
+       
+       livingRoom.furnitureInRoom.put("couches", couches);
+       
+       //Solarium Information
        Room solarium = new Room(
     		   "The Solarium",
 	       		"A pleasant solarium",
@@ -81,6 +146,8 @@ public class RoomManager {
        
        this.rooms[4] = solarium;
        
+       
+       //Garden Information
        Room garden = new Room(
     		   "The Garden",
 	       		"a beautiful garden",
@@ -95,6 +162,8 @@ public class RoomManager {
        
        this.rooms[5] = garden;
        
+       
+       //Upstairs Hallway Information
        Room upStairsHall = new Room(
     		   "The Upstairs Hallway",
 	       		"a small hallway connecting a few rooms",
@@ -109,6 +178,8 @@ public class RoomManager {
 	       		+ "Behind you, down the stairs, is the foyer."
     		   );
        
+       
+       //Master Bedroom Information
        Room masterBed = new Room(
     		   "The Master Bedroom",
 	       		"a well decorated bedroom with a large bed",
@@ -117,6 +188,8 @@ public class RoomManager {
 	       		+ "Behind you, to the south, is the upstairs hallway."
     		   );
        
+       
+       //Guest Bedroom Information
        Room guestBed = new Room(
     		   "The Guest Bedroom",
 	       		"a small, but comfortable, guest bedroom",
@@ -127,6 +200,8 @@ public class RoomManager {
 	       		+ "Behind you, to the east, is the upstairs hallway."
     		   );
        
+       
+       //Bathroom Information
        Room bathroom = new Room(
     		   "The Bathroom",
 	       		"a clean bathroom",

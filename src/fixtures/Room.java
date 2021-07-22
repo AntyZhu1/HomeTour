@@ -10,6 +10,8 @@ public class Room extends Fixture {
 	 */
 	
 	public HashMap<String,Room> exits = new HashMap<>();
+	
+	public HashMap<String,Furniture> furnitureInRoom = new HashMap<>();
 
 	public Room(String name, String shortDescription, String longDescription) {
 		super(name, shortDescription, longDescription);

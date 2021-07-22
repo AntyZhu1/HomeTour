@@ -17,4 +17,5 @@ public abstract class Fixture {
 		this.shortDescription = shortDescription2;
 		this.longDescription = longDescription2;
 	}
+	
 }

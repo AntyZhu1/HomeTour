@@ -5,6 +5,7 @@ import java.util.Scanner;  // Import the Scanner class
 
 import java.util.HashMap; // Import the HashMap class
 
+import fixtures.Furniture;
 import fixtures.Room;
 
 /*
@@ -49,6 +50,7 @@ public class Main {
 	private static void printRoom(Player player) {
 		
 		System.out.println("You are currently in " + player.currentRoom.getCurrentRoom() + ".");
+		player.currentRoom.closelyExamineRoom();
 		
 	}
 
@@ -57,7 +59,8 @@ public class Main {
 	 */
 	private static String[] collectInput() {
 		
-		System.out.println("What would you like to do?");
+		System.out.println("What would you like to do?"
+				+ "\n");
 		
 		Scanner userIn = new Scanner(System.in);
 		String input = userIn.nextLine();
@@ -200,20 +203,46 @@ public class Main {
 				
 			}
 			
-			//Interacting with furniture
+			//Examining furniture
 			if (command1.equals("examine")) {
 				
 				/* Check if object in question is in the room
 				 * print interaction
 				 * leave loop
 				 */
+				try {
+					Furniture examinedFurniture = p.currentRoom.furnitureInRoom.get(command2);
+					System.out.println("You see " + examinedFurniture.getFurnitureName());
+					System.out.println(examinedFurniture.getFurnitureDescription());
+					System.out.println("");
+
+				}
+				catch (Exception examineException) {
+					System.out.println("Sorry, I don't think that furniture exists here.");
+				}
 				
-				System.out.println("Furniture still a work in progress");
+//				System.out.println("Furniture still a work in progress");
 				
+			}
+			
+			//interacting with furniture
+			if (command1.equals("use")) {
+				try {
+					Furniture usedFurniture = p.currentRoom.furnitureInRoom.get(command2);
+					System.out.println(usedFurniture.getFurnitureInteraction()
+							+ "\n");
+					
+				}
+				
+				catch (Exception furnitureException) {
+					System.out.println("I'm sorry, I don't think that furniture is here.");
+				}
 			}
 			
 			//checking room or exits
 			if (command1.equals("check")) {
+				
+
 				
 				if (command2.equals("room")){
 					printRoom(p);
@@ -332,6 +361,7 @@ public class Main {
 					}
 					
 				}
+//				
 				else {
 					System.out.println("Sorry, what was that?"
 							+ "\n");
@@ -381,19 +411,23 @@ public class Main {
 	private static void printHelp() {
 		
 		System.out.println(
-				"To navigate between rooms, enter 'go <direction>'. For example: 'go north'."
+				"1.)To navigate between rooms, enter 'go <direction>'. For example: 'go north'."
 				+ "\n"
-				+ "To Interact with an object, enter 'examine <object>'. For example: 'examine chair'."
+				+ "2.) To check a specific opject, enter 'examine <object>'. For example: 'examine chair'."
 				+ "\n"
-				+ "To check the room again, use 'check room'."
+				+ "3.) To interact with an object, use 'use <object>. For example: 'use painting'. You can tell what furniture is usable by"
 				+ "\n"
-				+ "To check exits again, use 'check exits'."
+				+ "the asterisks around specific words. If the word has asterisks around it, for example: *chair*, you can interact with it."
 				+ "\n"
-				+ "To check a specific direction for an exit, use 'check <direction>'. For example: 'check north'."
+				+ "4.) To check the room again, use 'check room'."
 				+ "\n"
-				+ "To exit the house, use 'leave house' or 'leave'."
+				+ "5.) To check exits again, use 'check exits'."
 				+ "\n"
-				+ "To see this message again, use 'print help' or 'help'."
+				+ "6.) To check a specific direction for an exit, use 'check <direction>'. For example: 'check north'."
+				+ "\n"
+				+ "7.) To exit the house, use 'leave house' or 'leave'."
+				+ "\n"
+				+ "8.) To see this message again, use 'print help' or 'help'."
 				+ "\n");
 		
 	}
