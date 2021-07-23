@@ -22,4 +22,5 @@ public class Furniture extends Fixture{
 		return this.longDescription;
 	}
 	
+
 }

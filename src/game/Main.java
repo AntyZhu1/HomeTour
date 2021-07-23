@@ -96,6 +96,7 @@ public class Main {
 						p.currentRoom.closelyExamineRoom();
 						
 					}
+					
 					else {
 						System.out.println("There is no room to the north.");
 					}
@@ -231,7 +232,16 @@ public class Main {
 					Furniture usedFurniture = p.currentRoom.furnitureInRoom.get(command2);
 					System.out.println(usedFurniture.getFurnitureInteraction()
 							+ "\n");
-					
+					if (command2.equals("toilet")){
+						p.currentRoom.incrementFlushes();
+						if (p.currentRoom.flushedToiletCounter == 5) {
+							p.currentRoom.printToiletMessage();
+						}
+						else if (p.currentRoom.flushedToiletCounter > 5) {
+							player.currentRoom.printToiletMessageBruh();
+						}
+						
+					}
 				}
 				
 				catch (Exception furnitureException) {
@@ -241,8 +251,6 @@ public class Main {
 			
 			//checking room or exits
 			if (command1.equals("check")) {
-				
-
 				
 				if (command2.equals("room")){
 					printRoom(p);

@@ -153,7 +153,7 @@ public class RoomManager {
 	       		"a beautiful garden",
 	       		"Before you stands a beautiful garden, well maintained and flourishing."
 	       		+ "\n"
-	       		+ "Flowers of many different types grow all around you, from roses to carnations."
+	       		+ "*Flowers* of many different types grow all around you, from roses to carnations."
 	       		+ "\n"
 	       		+ "The sweet, gentle fragrance of flowers is in the air all around you."
 	       		+ "\n"
@@ -161,7 +161,17 @@ public class RoomManager {
     		   );
        
        this.rooms[5] = garden;
+       Furniture flowers = new Furniture(
+          		"Many different kinds of flowers",
+          		"Several different flowers, planted around the garden. ",
+          		"You stop and smell the flowers. The aromas which surround you are pleasant and comforting."
+          		+ "\n"
+          		+ "It's almost a nostalgic feeling, a small garden with beautiful flowers."
+          		+ "\n"
+          		+ "You eventually get up and move on."
+          		);
        
+       garden.furnitureInRoom.put("flowers", flowers);
        
        //Upstairs Hallway Information
        Room upStairsHall = new Room(
@@ -182,12 +192,25 @@ public class RoomManager {
        //Master Bedroom Information
        Room masterBed = new Room(
     		   "The Master Bedroom",
-	       		"a well decorated bedroom with a large bed",
+	       		"a well decorated bedroom with a large *bed*",
 	       		"The master bedroom is well decorated and comfortable looking, a large king sized bed lies against the wall in front of you."
 	       		+ "\n"
 	       		+ "Behind you, to the south, is the upstairs hallway."
     		   );
        
+       Furniture bigBed = new Furniture(
+    		   "A large King bed",
+    		   "The master bed, with very comfortable looking pillows.",
+    		   "Despite knowing it's a bit of a faux pas, you lie down on the bed anyways."
+    		   + "\n"
+    		   + "It's very comfortable, the pillows just the right firmness to be comfortable without feeling like"
+    		   + "\n"
+    		   + "you've set your head down on some bricks."
+    		   + "\n"
+    		   + "Though you are loathe to do it, you eventually get up and fix the bed a bit."
+    		   );
+       
+       masterBed.furnitureInRoom.put("bed", bigBed);
        
        //Guest Bedroom Information
        Room guestBed = new Room(
@@ -199,7 +222,17 @@ public class RoomManager {
 	       		+ "\n"
 	       		+ "Behind you, to the east, is the upstairs hallway."
     		   );
+       Furniture smallBed = new Furniture(
+    		   "A small but comfortable looking twin bed.",
+    		   "The smaller bed reserved for guests staying over. While not a massive mattress, it's still very soft looking.",
+    		   "You lay down in the guest bed. You are a guest after all."
+    		   + "\n"
+    		   + "It's a nice bed, the kind you'd enjoy a nice lazy weekend sleeping in on."
+    		   + "\n"
+    		   + "Though it pains you to leave now that you've gotten comfortable, you feel it's best that you be on your way."
+    		   );
        
+       guestBed.furnitureInRoom.put("bed", smallBed);
        
        //Bathroom Information
        Room bathroom = new Room(
@@ -207,8 +240,19 @@ public class RoomManager {
 	       		"a clean bathroom",
 	       		"The upstairs bathroom is clean and well kept. The smell of lavender emenates from a small candle atop the sink's countertop."
 	       		+ "\n"
+	       		+ "There is a shower and a *toilet*, as to be expected from a bathroom."
 	       		+ "Behind you, to the west, is the upstairs hallway."
     		   );
+       
+       Furniture toilet = new Furniture(
+    		   "A toilet",
+    		   "It's a toilet.",
+    		   "You flush the toilet. You watch as the water goes down the drain."
+    		   );
+       
+       bathroom.furnitureInRoom.put("toilet", toilet);
+       
+       masterBed.furnitureInRoom.put("bed", bigBed);
        
        //Exit Assignments per room
        

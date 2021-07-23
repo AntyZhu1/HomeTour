@@ -12,6 +12,9 @@ public class Room extends Fixture {
 	public HashMap<String,Room> exits = new HashMap<>();
 	
 	public HashMap<String,Furniture> furnitureInRoom = new HashMap<>();
+	
+	public int flushedToiletCounter = 0;
+
 
 	public Room(String name, String shortDescription, String longDescription) {
 		super(name, shortDescription, longDescription);
@@ -41,6 +44,20 @@ public class Room extends Fixture {
 	public Room getExit(String direction) {
 		
 		return exits.get(direction);
+	}
+	
+	public void incrementFlushes() {
+		this.flushedToiletCounter++;
+	}
+	
+	public void printToiletMessage() {
+		System.out.println("Really? You've flushed the toilet 5 times now. Are you a plumber? Are you making ABSOLUTELY sure that the toilet's"
+				+ "\n"
+				+ "flush is working? Please, don't waste more water. Just move on.");
+	}
+	
+	public void printToiletMessageBruh() {
+		System.out.println("bruh");
 	}
 	
 }
